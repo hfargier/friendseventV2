@@ -1,0 +1,17 @@
+# Désactiver les MultiViews pour éviter les conflits de noms
+Options -MultiViews
+
+RewriteEngine On
+RewriteBase /FriendsEvent/
+
+# 1. Force le HTTPS (Optionnel mais recommandé pour la PWA)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Si le fichier ou le dossier existe réellement (ex: assets/..., logo192.png), on le sert
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 3. Sinon, on renvoie tout sur index.html (pour le routage React)
+RewriteRule . index.html [L]

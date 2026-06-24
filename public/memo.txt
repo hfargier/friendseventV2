@@ -1,0 +1,48 @@
+voici comment on va lier ce formulaire au paiement :
+
+Le bouton "Payer ma part" envoie les ids des options cochées à ton PHP.
+
+Le PHP va chercher les vrais prix en base de données pour chaque ID reçu (sécurité !).
+
+Le PHP crée un "objet" Stripe avec une liste de produits simplifiée.
+
+Ex: Participation Barbecue (Adulte + Option Alcool) : 25€.
+
+
+-------------------------------------------------------------------------------------------------
+🛠️ Ce qu'il se passe maintenant quand tu lances l'app :
+Au chargement : L'app demande au PHP : "C'est quoi l'événement ?".
+
+Affichage : Le PHP répond avec les infos du weekend au ski (que tu as mis en BDD).
+
+Interaction : Tes amis cochent les options (ex: Logement + Ski). Le prix se met à jour.
+
+-------------------------------------------------------------------------------------------------
+STRIPE:
+
+Clé secrète: 
+[SUPPRIMEE - stocker la clé secrète uniquement dans les variables d'environnement côté serveur]
+
+Clé publique:
+pk_test_51T9QHIBA2iGD7lruLxb68jO4Fo9mWCfwArRE9zXC123dnnhsVzj1ai5JQdzhJuOeO1jVuU3jcDZT5dVgwHp6R0Wh00R9uqXdOM
+
+http://seme-et-tisse.fr/friendsEvent/webhook_stripe.php
+http://seme-et-tisse.fr/friendsEvent/create-checkout-session.php
+
+
+---------- TODO ----------------------------------------
+
+
+Stripe SDK : N'oublie pas de télécharger le dossier vendor (via Composer) dans le même répertoire pour que require_once('vendor/autoload.php') fonctionne.
+
+Success/Cancel URL : J'ai mis des URLs automatiques basées sur ton domaine, mais assure-toi d'avoir ces pages prêtes sur ton site.
+
+Casting JSON : J'ai ajouté le casting (int) et (float) pour que ton React ne fasse pas d'erreurs de calcul (ex: transformer 10 + 5 en 105).
+
+Changer les clés : Quand tu seras prêt, il faudra remplacer les sk_test et pk_test par les clés "Live" (mais reste en test pour l'instant !).
+
+Secret de Webhook : Assure-toi que le whsec_... dans ton webhook correspond bien à celui généré par Stripe dans l'onglet Webhooks.
+
+Base de données : Vérifie que ta table registrations se remplit bien après un test de paiement (utilise les numéros de carte de test Stripe comme 4242 4242 4242 4242).
+
+Est-ce que tu veux que je te donne un coup de main pour peaufiner le CSS afin que le rendu soit vraiment "Pixel Perfect" sur mobile ? Car c'est là que tes amis vont l'ouvrir (probablement via un lien WhatsApp).

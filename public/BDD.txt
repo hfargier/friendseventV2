@@ -1,0 +1,21 @@
+semee2289142_28qnpv
+MYSQLChoune@69
+
+-- Table des événements
+table events :
+id (INT, Primary Key, Auto Increment)
+titre (VARCHAR 255)
+date_event (DATETIME)
+lieu (VARCHAR 255)
+description (TEXT)
+
+-- Table des options liées à l'événement
+CREATE TABLE event_options (
+
+
+
+events_billetterie : L'événement global (Nom, date, description, image).
+
+event_tickets : Les différents tarifs pour un même événement (ex: "Early Bird", "Plein Tarif", "Moins de 12 ans") avec leur prix et le quota de places.
+
+registrations : Les inscriptions validées (nom de l'acheteur, email, ID de transaction Stripe, montant total).
