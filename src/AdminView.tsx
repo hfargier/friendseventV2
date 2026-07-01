@@ -4,7 +4,7 @@ import { AdminLogin } from './AdminLogin';
 import { EventForm } from './EventForm';
 import { EventStatsDetails } from './EventStatsDetails';
 
-const API_URL = 'https://seme-et-tisse.fr/API/api_friends_event.php';
+const API_URL = 'https://seme-et-tisse.fr/webappperso/API/api_friends_event.php';
 
 export default function AdminView({ onBack }: { onBack: () => void }) {
   // --- ÉTATS ---
@@ -31,7 +31,11 @@ export default function AdminView({ onBack }: { onBack: () => void }) {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}?action=get_admin_events&pass=${adminPass}&v=${Date.now()}`);
+      const res = await fetch(`${API_URL}?action=get_admin_events&v=${Date.now()}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pass: adminPass }),
+      });
       const data = await res.json();
       if (Array.isArray(data)) {
         setEvents(data);
@@ -52,7 +56,11 @@ export default function AdminView({ onBack }: { onBack: () => void }) {
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}?action=get_admin_list&pass=${adminPass}&event_id=${id}&v=${Date.now()}`);
+      const res = await fetch(`${API_URL}?action=get_admin_list&event_id=${id}&v=${Date.now()}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pass: adminPass }),
+      });
       const data = await res.json();
       setAdminData({
         participants: data.participants || [],
@@ -100,10 +108,10 @@ export default function AdminView({ onBack }: { onBack: () => void }) {
     if (!eventForm.titre || !eventForm.date) return alert("Le titre et la date sont requis.");
     setLoading(true);
     const action = adminMode === 'edit' ? 'update_event' : 'create_event';
-    const body = adminMode === 'edit' ? { ...eventForm, id: editingEventId } : eventForm;
+    const body = { ...(adminMode === 'edit' ? { ...eventForm, id: editingEventId } : eventForm), pass: adminPass };
 
     try {
-      const res = await fetch(`${API_URL}?action=${action}&pass=${adminPass}`, {
+      const res = await fetch(`${API_URL}?action=${action}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -123,9 +131,10 @@ export default function AdminView({ onBack }: { onBack: () => void }) {
   const toggleStatus = async (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     try {
-        await fetch(`${API_URL}?action=toggle_event_status&pass=${adminPass}`, {
+        await fetch(`${API_URL}?action=toggle_event_status`, {
             method: 'POST',
-            body: JSON.stringify({ id }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, pass: adminPass }),
         });
         setEvents((prev: any) =>
             prev.map((ev: any) => ev.id === id ? { ...ev, is_active: ev.is_active === 1 ? 0 : 1 } : ev)
@@ -139,9 +148,10 @@ export default function AdminView({ onBack }: { onBack: () => void }) {
     e.stopPropagation();
     if (window.confirm(`Supprimer définitivement "${titre}" ?`)) {
       try {
-          await fetch(`${API_URL}?action=delete_event&pass=${adminPass}`, {
+          await fetch(`${API_URL}?action=delete_event`, {
             method: 'POST',
-            body: JSON.stringify({ id }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, pass: adminPass }),
           });
           setEvents((prev) => prev.filter((ev: any) => ev.id !== id));
       } catch (err) {

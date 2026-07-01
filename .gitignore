@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Secrets / notes never meant to be public or committed
+.env
+.env.*
+!.env.example
+public/BDD.txt
+public/memo.txt
+src/config.php
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

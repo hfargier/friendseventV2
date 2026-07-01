@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => {
         },
         
         manifest: {
-          id: "/FriendsEvent/index.html",
+          id: "/webappperso/FriendsEvent/index.html",
           name: "Friends Event Booking",
           short_name: "FriendsEvent",
           description: "Application de réservation pour événements entre amis",

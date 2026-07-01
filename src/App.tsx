@@ -5,7 +5,7 @@ import AdminView from './AdminView';
 
 // Utilisation d'un timestamp pour le Cache Buster
 const version = Date.now();
-const API_URL = `https://seme-et-tisse.fr/API/api_friends_event.php?v=${version}`;
+const API_URL = `https://seme-et-tisse.fr/webappperso/API/api_friends_event.php?v=${version}`;
 
 // --- INTERFACES ---
 interface Option { 

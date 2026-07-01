@@ -2,7 +2,7 @@
 Options -MultiViews
 
 RewriteEngine On
-RewriteBase /FriendsEvent/
+RewriteBase /webappperso/FriendsEvent/
 
 # 1. Force le HTTPS (Optionnel mais recommandé pour la PWA)
 RewriteCond %{HTTPS} off
