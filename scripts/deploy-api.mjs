@@ -1,7 +1,7 @@
-// Upload du backend PHP (src/api_friends_event.php + src/config.php) vers le
+// Upload du backend PHP (api_friends_event.php, success.php, config.php) vers le
 // dossier API du serveur. Utilise le même FTP restreint à webappperso/ que deploy.mjs.
-// NE gère PAS le dossier vendor stripe-php ni success.php : à déposer une fois
-// manuellement s'ils ne sont pas déjà présents côté serveur.
+// NE gère PAS le dossier vendor stripe-php : à déposer une fois manuellement
+// s'il n'est pas déjà présent côté serveur.
 import 'dotenv/config';
 import { Client } from 'basic-ftp';
 import { existsSync } from 'node:fs';
@@ -16,7 +16,7 @@ for (const [key, val] of Object.entries({ FTP_HOST, FTP_USER, FTP_PASSWORD })) {
   }
 }
 
-const files = ['src/api_friends_event.php', 'src/config.php'];
+const files = ['src/api_friends_event.php', 'src/success.php', 'src/config.php'];
 for (const f of files) {
   if (!existsSync(f)) {
     console.error(`Fichier introuvable: ${f}`);
@@ -40,7 +40,7 @@ try {
   for (const f of files) {
     await client.uploadFrom(f, f.split('/').pop());
   }
-  console.log('Backend déployé. Vérifie que stripe-php/ et success.php sont bien présents côté serveur (non gérés par ce script).');
+  console.log('Backend déployé. Vérifie que stripe-php/ est bien présent côté serveur (non géré par ce script).');
 } catch (err) {
   console.error('Echec du déploiement API:', err);
   process.exitCode = 1;

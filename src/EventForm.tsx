@@ -107,7 +107,7 @@ export const EventForm = ({ mode, form, setForm, onSave, loading }: Props) => {
           />
         </div>
       ))}
-      <button className="admin-link" onClick={addOption}>
+      <button className="add-option-btn" onClick={addOption}>
         + Ajouter une option
       </button>
       <button

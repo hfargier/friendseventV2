@@ -196,7 +196,7 @@ switch ($action) {
             if (empty($lines)) { throw new Exception("Erreur de récupération des options."); }
 
             $session = \Stripe\Checkout\Session::create([
-                'payment_method_types' => ['card', 'paypal'],
+                'payment_method_types' => ['card'],
                 'line_items' => $lines,
                 'mode' => 'payment',
                 // On stocke les sélections en metadata pour les récupérer après le paiement

@@ -203,6 +203,86 @@ body {
   cursor: pointer;
 }
 
+/* --- FORMULAIRES ADMIN (connexion, création/édition d'événement) --- */
+.modern-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--slate-950);
+  border: 1px solid var(--slate-700);
+  border-radius: 14px;
+  padding: 14px 16px;
+  color: var(--white);
+  font-size: 0.95rem;
+  font-family: inherit;
+  margin-bottom: 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.modern-input::placeholder {
+  color: var(--slate-400);
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: var(--indigo);
+  background: var(--slate-900);
+}
+
+textarea.modern-input {
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.create-form h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 24px;
+  text-align: center;
+  color: var(--white);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.login-form h2 {
+  margin: 0 0 24px;
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.login-form .modern-input {
+  text-align: center;
+}
+
+.indigo-color {
+  color: var(--indigo);
+}
+
+.add-option-btn {
+  width: 100%;
+  background: transparent;
+  border: 1.5px dashed var(--slate-700);
+  border-radius: 14px;
+  padding: 14px;
+  color: var(--indigo);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.add-option-btn:hover {
+  border-color: var(--indigo);
+  background: var(--indigo-soft);
+}
+
 .admin-menu-btn.create {
   width: 100%;
   background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
